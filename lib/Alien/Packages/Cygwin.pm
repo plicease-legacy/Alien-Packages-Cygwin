@@ -17,6 +17,9 @@ use IPC::Cmd qw( can_run );
    say 'Version: ' . $package->{Version};
  }
 
+ my $perl_package = Alien::Packages::Cygwin->list_owners('/usr/bin/perl');
+ say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
+
 =head1 DESCRIPTION
 
 This module provides package information for the Cygwin environment.

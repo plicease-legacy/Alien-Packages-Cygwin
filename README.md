@@ -12,6 +12,9 @@ Get information from Cygwin's packages via cygcheck and LWP
       say 'Version: ' . $package->{Version};
     }
 
+    my $perl_package = Alien::Packages::Cygwin->list_owners('/usr/bin/perl');
+    say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
+
 # DESCRIPTION
 
 This module provides package information for the Cygwin environment.
