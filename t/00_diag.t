@@ -1,6 +1,5 @@
 use strict;
 use warnings;
-use v5.10;
 use Test::More tests => 1;
 
 BEGIN { eval q{ use EV } }
@@ -21,7 +20,9 @@ foreach my $module (@modules)
 {
   if(eval qq{ use $module; 1 })
   {
-    diag sprintf "%-20s %s", $module, eval qq{ \$$module\::VERSION } // 'undef';
+    my $ver = eval qq{ \$$module\::VERSION };
+    $ver = 'undef' unless defined $ver;
+    diag sprintf "%-20s %s", $module, $ver;
   }
   else
   {
