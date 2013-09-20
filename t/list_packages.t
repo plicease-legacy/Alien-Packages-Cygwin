@@ -13,3 +13,4 @@ my($package) = grep { $_->{Package} eq 'cygwin' } @list;
 ok $package, "has cygwin package";
 
 ok $package->{Version}, "package.Version = " . $package->{Version};
+

@@ -33,7 +33,20 @@ Returns true when when cygcheck command was found in the path.
 
     my @packages = Alien::Packages::Cygwin->list_packages
 
-Returns the list of installed _cygwin_ packages.
+Returns the list of installed _cygwin_ packages.  Each package
+is returned as a hashref containing a
+
+- Package
+
+    the name of the package
+
+- Version
+
+    The version of the package
+
+- Description
+
+    Empty string (descriptions are not available).
 
 ## list\_fileowners
 

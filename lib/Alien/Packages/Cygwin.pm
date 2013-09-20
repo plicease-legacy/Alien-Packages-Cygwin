@@ -3,12 +3,14 @@ package Alien::Packages::Cygwin;
 use strict;
 use warnings;
 use IPC::Cmd qw( can_run );
+use IPC::Run qw( run );
 
 # ABSTRACT: Get information from Cygwin's packages via cygcheck and LWP
 # VERSION
 
 =head1 SYNOPSIS
 
+ # without Alien::Packages
  use Alien::Packages::Cygwin;
  
  foreach my $package (Alien::Packages::Cygwin->list_packages)
@@ -18,6 +20,19 @@ use IPC::Cmd qw( can_run );
  }
 
  my $perl_package = Alien::Packages::Cygwin->list_owners('/usr/bin/perl');
+ say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
+
+ # with Alien::Packages
+ use Alien::Packages;
+ 
+ my $packages = Alien::Packages->new;
+ foreach my $package ($packages->list_packages)
+ {
+   say 'Name:    ' . $package->{Name};
+   say 'Version: ' . $package->{Version};
+ }
+
+ my $perl_package = $packages->list_owners('/usr/bin/perl');
  say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
 
 =head1 DESCRIPTION
@@ -59,7 +74,24 @@ sub usable
 
  my @packages = Alien::Packages::Cygwin->list_packages
 
-Returns the list of installed I<cygwin> packages.
+Returns the list of installed I<cygwin> packages.  Each package
+is returned as a hashref containing a
+
+=over 4
+
+=item Package
+
+the name of the package
+
+=item Version
+
+The version of the package
+
+=item Description
+
+Empty string (descriptions are not available).
+
+=back
 
 =cut
 
@@ -101,10 +133,13 @@ sub list_fileowners
 
   foreach my $file (@files)
   {
-    my $output = `$cygcheck -f $file`; # FIXME: files with spaces
-    if($output =~ s/-[^-]*-[^-]*\s+//)
+    my $in;
+    my $out;
+    my $err;
+    run [$cygcheck, -f => $file], \$in, \$out, \$err;
+    if($out =~ s/-[^-]*-[^-]*\s+//)
     {
-      push @{ $owners{$file} }, { Package => $output };
+      push @{ $owners{$file} }, { Package => $out };
     }
   }  
   
