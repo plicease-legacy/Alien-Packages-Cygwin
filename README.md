@@ -4,6 +4,7 @@ Get information from Cygwin's packages via cygcheck and LWP
 
 # SYNOPSIS
 
+    # without Alien::Packages
     use Alien::Packages::Cygwin;
     
     foreach my $package (Alien::Packages::Cygwin->list_packages)
@@ -13,6 +14,19 @@ Get information from Cygwin's packages via cygcheck and LWP
     }
 
     my $perl_package = Alien::Packages::Cygwin->list_owners('/usr/bin/perl');
+    say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
+
+    # with Alien::Packages
+    use Alien::Packages;
+    
+    my $packages = Alien::Packages->new;
+    foreach my $package ($packages->list_packages)
+    {
+      say 'Name:    ' . $package->{Name};
+      say 'Version: ' . $package->{Version};
+    }
+
+    my $perl_package = $packages->list_owners('/usr/bin/perl');
     say 'Perl package is ' . $perl_package->{"/usr/bin/perl"}->[0]->{Package};
 
 # DESCRIPTION
