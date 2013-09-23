@@ -5,7 +5,7 @@ use warnings;
 use IPC::Cmd qw( can_run );
 use IPC::Run qw( run );
 
-# ABSTRACT: Get information from Cygwin's packages via cygcheck and LWP
+# ABSTRACT: Get information from Cygwin's packages via cygcheck
 # VERSION
 
 =head1 SYNOPSIS

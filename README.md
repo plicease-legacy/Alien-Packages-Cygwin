@@ -1,6 +1,6 @@
 # Alien::Packages::Cygwin
 
-Get information from Cygwin's packages via cygcheck and LWP
+Get information from Cygwin's packages via cygcheck
 
 # SYNOPSIS
 
