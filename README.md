@@ -1,12 +1,17 @@
-# Alien::Packages::Cygwin
+# NAME
 
-Get information from Cygwin's packages via cygcheck
+Alien::Packages::Cygwin - Get information from Cygwin's packages via cygcheck
+
+# VERSION
+
+version 0.01
 
 # SYNOPSIS
 
     # without Alien::Packages
     use Alien::Packages::Cygwin;
     
+
     foreach my $package (Alien::Packages::Cygwin->list_packages)
     {
       say 'Name:    ' . $package->{Name};
@@ -19,6 +24,7 @@ Get information from Cygwin's packages via cygcheck
     # with Alien::Packages
     use Alien::Packages;
     
+
     my $packages = Alien::Packages->new;
     foreach my $package ($packages->list_packages)
     {
