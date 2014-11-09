@@ -32,7 +32,7 @@ Get information from Cygwin's packages via cygcheck
 # DESCRIPTION
 
 This module provides package information for the Cygwin environment.
-It can also be used as a plugin for [Alien::Packages](http://search.cpan.org/perldoc?Alien::Packages), and will be
+It can also be used as a plugin for [Alien::Packages](https://metacpan.org/pod/Alien::Packages), and will be
 used automatically if the environment is detected.
 
 # METHODS
