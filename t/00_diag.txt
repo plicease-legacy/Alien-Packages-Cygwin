@@ -1,5 +1,0 @@
-Alien::Packages
-IPC::Cmd
-IPC::Run
-Module::Build
-Test::More
